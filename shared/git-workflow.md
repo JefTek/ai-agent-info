@@ -109,3 +109,196 @@ Destructive commands include, but are not limited to:
 - Do not discard or overwrite changes you did not create.
 - Explain the problem, current branch, working tree state, and safest next options.
 - Ask for explicit authorization before any destructive recovery step.
+   git switch -c agent/<task-id>-<short-description> origin/main
+   ```
+
+   Use `origin/master` or the repository's configured default branch when it is not `main`.
+
+5. When multiple agents may work concurrently, use a dedicated Git worktree:
+
+   ```bash
+   git worktree add <isolated-path> \
+     -b agent/<task-id>-<short-description> origin/main
+   ```
+
+   Do not continue if the intended worktree or branch is already being used by another agent.
+
+## Before implementation
+
+- Understand the requested behavior and acceptance criteria.
+- Inspect the relevant implementation and tests.
+- Search for established repository patterns before creating new abstractions.
+- Identify the smallest set of files that should change.
+- Record the starting test status when relevant.
+- Do not change code until you understand how the affected area currently works.
+
+If the working tree contains pre-existing changes, preserve them. Do not modify or include them in your commits unless they are explicitly part of the assigned task.
+
+## During implementation
+
+- Make the smallest complete change that satisfies the task.
+- Follow existing architecture, naming, formatting, and testing conventions.
+- Add or update tests for changed behavior.
+- Avoid broad rewrites.
+- Avoid unrelated dependency upgrades.
+- Do not edit lockfiles unless dependency changes are required.
+- Do not suppress warnings or disable checks merely to make validation pass.
+- Stop and report any unexpected repository state, ambiguous destructive operation, security concern, or conflict with existing work.
+
+## Commits
+
+Create logical, reviewable commits.
+
+Before each commit:
+
+```bash
+git status --short
+git diff
+git diff --check
+```
+
+Stage files deliberately:
+
+```bash
+git add <specific-file-or-directory>
+```
+
+Do not use `git add .` without first confirming that every changed file belongs to the task.
+
+Use descriptive commit messages, preferably Conventional Commit format:
+
+```text
+feat(scope): add requested behavior
+fix(scope): correct specific defect
+test(scope): cover edge case
+docs(scope): document configuration
+refactor(scope): simplify implementation without behavior change
+```
+
+Each commit must:
+
+- represent one coherent change
+- leave the repository in a valid state
+- contain no secrets or unrelated files
+- explain intent rather than merely listing edited files
+
+## Validation
+
+Run the repository's documented validation commands. This normally includes:
+
+- formatting checks
+- linting
+- static analysis or type checking
+- unit tests
+- integration tests relevant to the change
+- build or packaging checks
+
+Do not claim a check passed unless you actually ran it and observed a successful result.
+
+When a check cannot run, report:
+
+- the exact command
+- the reason it could not run
+- the relevant error
+- whether the failure appears related to the change
+
+## Final review
+
+Before pushing, inspect all branch changes:
+
+```bash
+git status --short
+git diff --check
+git diff origin/main...HEAD
+git log --oneline origin/main..HEAD
+```
+
+Confirm that:
+
+- only intended files changed
+- acceptance criteria are satisfied
+- tests cover the new behavior
+- no debug code remains
+- no temporary files are included
+- no secrets or credentials are present
+- documentation is updated when needed
+- commits are understandable and appropriately scoped
+
+## Synchronizing with the base branch
+
+Immediately before pushing or updating the pull request:
+
+```bash
+git fetch origin
+git rebase origin/main
+```
+
+Only rebase when this branch is owned exclusively by this task. Do not rewrite a shared branch.
+
+If conflicts occur:
+
+- resolve only conflicts you understand
+- rerun validation after resolving them
+- do not guess at another contributor's intent
+- stop and report the conflict when safe resolution is unclear
+
+Never use force push unless explicitly authorized. When authorization is provided for an agent-owned branch, use:
+
+```bash
+git push --force-with-lease
+```
+
+Never use plain `--force`.
+
+## Push and pull request
+
+Push the task branch:
+
+```bash
+git push -u origin agent/<task-id>-<short-description>
+```
+
+Create or update a pull request, but do not merge it unless explicitly authorized.
+
+The pull request description must include:
+
+### Summary
+
+A concise explanation of what changed and why.
+
+### Changes
+
+The important implementation details.
+
+### Validation
+
+Every command run and its result.
+
+### Risks
+
+Compatibility concerns, migrations, security implications, limitations, or known edge cases.
+
+### Files
+
+Any generated files, database migrations, configuration changes, or dependency changes.
+
+### Issue
+
+The related issue or task identifier.
+
+## Completion report
+
+At completion, report:
+
+- branch name
+- worktree path, when applicable
+- commit hashes and messages
+- files changed
+- concise implementation summary
+- tests and checks run
+- results of each check
+- pull-request link, when created
+- known risks or unresolved concerns
+- any actions requiring human review
+
+Do not describe the task as complete while tests are failing, conflicts remain unresolved, or required acceptance criteria have not been verified.
