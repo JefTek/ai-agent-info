@@ -5,6 +5,7 @@ Guidance in this directory applies across agents and workspaces.
 ## Contents
 
 - [Git workflow instructions](git-workflow.md)
+- [Setting up an OKF bundle](okf-bundle-setup.md)
 # Shared guidance
 
 ## Reliable workflow
