@@ -141,10 +141,10 @@ human reading and agent retrieval.
 No body sections are required. These headings carry conventional
 meaning and SHOULD be used when applicable:
 
-| Heading         | Purpose                                             |
-| --------------- | --------------------------------------------------- |
-| `# Schema`      | Structured description of an asset's columns/fields |
-| `# Examples`    | Concrete usage examples, usually fenced code blocks |
+| Heading         | Purpose                                               |
+| --------------- | ----------------------------------------------------- |
+| `# Schema`      | Structured description of an asset's columns/fields   |
+| `# Examples`    | Concrete usage examples, usually fenced code blocks   |
 | `# Computation` | The sanctioned computation of an Attested Computation |
 
 ### Example

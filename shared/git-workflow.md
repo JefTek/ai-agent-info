@@ -12,7 +12,8 @@ Follow this Git workflow for all repository changes.
 - Use one short-lived branch for one task.
 - Keep changes narrowly scoped to the requested task.
 - Do not include unrelated refactoring, formatting, dependency updates, or cleanup.
-- Do not commit secrets, credentials, tokens, generated artifacts, environment files, or local configuration.
+- Do not commit secrets, credentials, tokens, generated artifacts,
+  environment files, or local configuration.
 - Do not bypass tests, hooks, branch protection, or CI checks.
 - Do not use destructive Git commands unless explicitly authorized.
 
@@ -64,64 +65,15 @@ Destructive commands include, but are not limited to:
    git status --short
    ```
 
-## During the task
-
-- Check status before editing, committing, rebasing, merging, or switching branches.
-- Only edit files needed for the requested task.
-- Preserve user and other agent changes.
-- If unrelated changes are present, leave them untouched and ask for guidance when they block the task.
-- Prefer small, reviewable commits that describe the completed work.
-- Run the repository's existing validation commands for the files or systems you changed.
-
-## Committing changes
-
-1. Review the final diff:
-
-   ```bash
-   git status --short
-   git diff
-   ```
-
-2. Ensure no secrets, generated artifacts, local configuration, or unrelated changes are staged.
-3. Stage only files you intentionally changed:
-
-   ```bash
-   git add <paths>
-   ```
-
-4. Commit with a concise message that describes the task:
-
-   ```bash
-   git commit -m "<short task summary>"
-   ```
-
-## Pull requests
-
-- Push only the task branch.
-- Open one pull request for the task branch.
-- Summarize the purpose, notable changes, and validation performed.
-- Do not merge the pull request unless explicitly authorized.
-- If CI fails, inspect the logs, fix only task-related issues, and rerun validation.
-
-## If something goes wrong
-
-- Stop before using destructive commands.
-- Do not discard or overwrite changes you did not create.
-- Explain the problem, current branch, working tree state, and safest next options.
-- Ask for explicit authorization before any destructive recovery step.
-   git switch -c agent/<task-id>-<short-description> origin/main
-   ```
-
-   Use `origin/master` or the repository's configured default branch when it is not `main`.
-
-5. When multiple agents may work concurrently, use a dedicated Git worktree:
+6. When multiple agents may work concurrently, use a dedicated Git worktree:
 
    ```bash
    git worktree add <isolated-path> \
      -b agent/<task-id>-<short-description> origin/main
    ```
 
-   Do not continue if the intended worktree or branch is already being used by another agent.
+   Do not continue if the intended worktree or branch is already being used
+   by another agent.
 
 ## Before implementation
 
@@ -132,10 +84,13 @@ Destructive commands include, but are not limited to:
 - Record the starting test status when relevant.
 - Do not change code until you understand how the affected area currently works.
 
-If the working tree contains pre-existing changes, preserve them. Do not modify or include them in your commits unless they are explicitly part of the assigned task.
+If the working tree contains pre-existing changes, preserve them. Do not
+modify or include them in your commits unless they are explicitly part of the
+assigned task.
 
 ## During implementation
 
+- Check status before editing, committing, rebasing, merging, or switching branches.
 - Make the smallest complete change that satisfies the task.
 - Follow existing architecture, naming, formatting, and testing conventions.
 - Add or update tests for changed behavior.
@@ -143,7 +98,8 @@ If the working tree contains pre-existing changes, preserve them. Do not modify 
 - Avoid unrelated dependency upgrades.
 - Do not edit lockfiles unless dependency changes are required.
 - Do not suppress warnings or disable checks merely to make validation pass.
-- Stop and report any unexpected repository state, ambiguous destructive operation, security concern, or conflict with existing work.
+- Stop and report any unexpected repository state, ambiguous destructive
+  operation, security concern, or conflict with existing work.
 
 ## Commits
 
@@ -163,7 +119,8 @@ Stage files deliberately:
 git add <specific-file-or-directory>
 ```
 
-Do not use `git add .` without first confirming that every changed file belongs to the task.
+Do not use `git add .` without first confirming that every changed file
+belongs to the task.
 
 Use descriptive commit messages, preferably Conventional Commit format:
 
@@ -193,7 +150,8 @@ Run the repository's documented validation commands. This normally includes:
 - integration tests relevant to the change
 - build or packaging checks
 
-Do not claim a check passed unless you actually ran it and observed a successful result.
+Do not claim a check passed unless you actually ran it and observed a
+successful result.
 
 When a check cannot run, report:
 
@@ -233,7 +191,8 @@ git fetch origin
 git rebase origin/main
 ```
 
-Only rebase when this branch is owned exclusively by this task. Do not rewrite a shared branch.
+Only rebase when this branch is owned exclusively by this task. Do not
+rewrite a shared branch.
 
 If conflicts occur:
 
@@ -242,7 +201,8 @@ If conflicts occur:
 - do not guess at another contributor's intent
 - stop and report the conflict when safe resolution is unclear
 
-Never use force push unless explicitly authorized. When authorization is provided for an agent-owned branch, use:
+Never use force push unless explicitly authorized. When authorization is
+provided for an agent-owned branch, use:
 
 ```bash
 git push --force-with-lease
@@ -260,6 +220,8 @@ git push -u origin agent/<task-id>-<short-description>
 
 Create or update a pull request, but do not merge it unless explicitly authorized.
 
+- If CI fails, inspect the logs, fix only task-related issues, and rerun validation.
+
 The pull request description must include:
 
 ### Summary
@@ -276,7 +238,8 @@ Every command run and its result.
 
 ### Risks
 
-Compatibility concerns, migrations, security implications, limitations, or known edge cases.
+Compatibility concerns, migrations, security implications, limitations, or
+known edge cases.
 
 ### Files
 
@@ -301,4 +264,12 @@ At completion, report:
 - known risks or unresolved concerns
 - any actions requiring human review
 
-Do not describe the task as complete while tests are failing, conflicts remain unresolved, or required acceptance criteria have not been verified.
+Do not describe the task as complete while tests are failing, conflicts
+remain unresolved, or required acceptance criteria have not been verified.
+
+## If something goes wrong
+
+- Stop before using destructive commands.
+- Do not discard or overwrite changes you did not create.
+- Explain the problem, current branch, working tree state, and safest next options.
+- Ask for explicit authorization before any destructive recovery step.

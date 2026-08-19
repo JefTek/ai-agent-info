@@ -1,0 +1,32 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  markdown:
+    name: markdownlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # Rules and file globs come from .markdownlint-cli2.jsonc, so local runs
+      # and CI check exactly the same thing.
+      - uses: DavidAnson/markdownlint-cli2-action@v24
+
+  links:
+    name: link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # --offline checks relative paths and in-page anchors only. External URLs
+      # are deliberately not requested: they fail for rate limiting and
+      # transient outages that say nothing about this repository.
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline --include-fragments --no-progress "**/*.md"
+          fail: true
