@@ -41,8 +41,8 @@ Typical ways to apply an entry:
    applies to every task in that workspace.
 3. Paste a single section into a chat when it applies to one task only.
 
-Replace bracketed placeholders with project-specific details, and adapt
-commands and paths instead of assuming an example is safe for every project.
+See [Use in a workspace](../README.md#use-in-a-workspace) for how entries are
+adapted to a project.
 
 ## Contents
 

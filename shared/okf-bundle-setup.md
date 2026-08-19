@@ -1,4 +1,4 @@
-# Setting Up an OKF Bundle
+# Setting up an OKF bundle
 
 Follow this document to create a new Open Knowledge Format (OKF) bundle
 from scratch, or to bring an existing folder of notes into conformance.

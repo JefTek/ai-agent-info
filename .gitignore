@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Editor and IDE
+.idea/
+.vscode/
+*.swp
+*~

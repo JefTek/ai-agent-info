@@ -1,10 +1,5 @@
 # ai-agent-info
 
-Shared guidance for AI agents working in repositories and workspaces.
-
-## Shared guidance
-
-- [Git workflow instructions](shared/git-workflow.md)
 A practical, workspace-neutral library of notes, tips, tricks, skills, and
 agent patterns for Claude and GitHub Copilot.
 
@@ -15,6 +10,11 @@ agent patterns for Claude and GitHub Copilot.
 | [Claude AI](claude-ai/README.md) | Context management, prompt patterns, skills, and agent roles |
 | [GitHub Copilot](copilot/README.md) | Repository guidance, coding workflows, skills, and agent roles |
 | [Shared guidance](shared/README.md) | Practices that apply to either assistant |
+
+Each area's README is the index for that area. `shared/` also holds standalone
+documents — currently [Git workflow instructions](shared/git-workflow.md) and
+[Setting up an OKF bundle](shared/okf-bundle-setup.md) — which are listed in
+its [Contents](shared/README.md#contents).
 
 ## Use in a workspace
 
@@ -28,7 +28,16 @@ Each entry is deliberately tool-agnostic where possible. Adapt commands,
 paths, and guardrails to the workspace instead of assuming examples are safe
 for every project.
 
+## Working in this repository
+
+Agent instructions for this repository live in [AGENTS.md](AGENTS.md), which
+applies the guidance in `shared/` to the repository itself.
+
 ## Contributing
 
-See [the contribution guide](docs/contributing.md) for the entry format and
+See [the contribution guide](CONTRIBUTING.md) for the entry format and
 guidelines for adding a reusable item.
+
+## License
+
+Licensed under the [Apache License 2.0](LICENSE).
