@@ -33,6 +33,10 @@ for every project.
 Agent instructions for this repository live in [AGENTS.md](AGENTS.md), which
 applies the guidance in `shared/` to the repository itself.
 
+[docs/](docs/README.md) tracks the state of the project rather than
+instructing an agent: a [changelog](docs/CHANGELOG.md), a
+[roadmap](docs/ROADMAP.md), and [known issues](docs/ISSUES.md).
+
 ## Contributing
 
 See [the contribution guide](CONTRIBUTING.md) for the entry format and

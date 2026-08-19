@@ -33,6 +33,18 @@ source code, build, dependency manifest, or test suite.
   actually checking it, and state the version any external specification was
   read at.
 
+## Recording changes
+
+Add notable changes to [docs/CHANGELOG.md](docs/CHANGELOG.md) under
+**Unreleased**, in the same pull request that makes them. Notable means a
+reader of the repository would want to know: new or removed documents,
+reorganized content, changed conventions. Typo fixes and rewrapping do not
+qualify.
+
+Problems found but not fixed belong in [docs/ISSUES.md](docs/ISSUES.md) if a
+reader should know about them, or in GitHub Issues if they need discussion.
+Do not leave a known defect recorded only in a pull request description.
+
 ## Keeping the indexes in sync
 
 Adding or renaming a standalone document under `shared/` means updating its

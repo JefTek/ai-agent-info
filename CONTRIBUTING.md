@@ -49,6 +49,13 @@ A standalone document should:
 Use sentence case for headings, except where a proper noun or a term from an
 external specification requires otherwise.
 
+## Tracking
+
+Notable changes go in [docs/CHANGELOG.md](docs/CHANGELOG.md) under
+**Unreleased**, in the same pull request. [docs/ROADMAP.md](docs/ROADMAP.md)
+holds candidate work, and [docs/ISSUES.md](docs/ISSUES.md) holds open problems
+and accepted limitations.
+
 ## Linting
 
 Markdown is linted with [markdownlint][ml]. Run it before opening a pull
