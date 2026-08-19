@@ -55,6 +55,60 @@ Destructive commands include, but are not limited to:
 4. Create a new branch from the current remote default branch:
 
    ```bash
+   git switch -c agent/<short-task-name> origin/<default-branch>
+   ```
+
+5. Confirm the working tree is clean before making changes:
+
+   ```bash
+   git status --short
+   ```
+
+## During the task
+
+- Check status before editing, committing, rebasing, merging, or switching branches.
+- Only edit files needed for the requested task.
+- Preserve user and other agent changes.
+- If unrelated changes are present, leave them untouched and ask for guidance when they block the task.
+- Prefer small, reviewable commits that describe the completed work.
+- Run the repository's existing validation commands for the files or systems you changed.
+
+## Committing changes
+
+1. Review the final diff:
+
+   ```bash
+   git status --short
+   git diff
+   ```
+
+2. Ensure no secrets, generated artifacts, local configuration, or unrelated changes are staged.
+3. Stage only files you intentionally changed:
+
+   ```bash
+   git add <paths>
+   ```
+
+4. Commit with a concise message that describes the task:
+
+   ```bash
+   git commit -m "<short task summary>"
+   ```
+
+## Pull requests
+
+- Push only the task branch.
+- Open one pull request for the task branch.
+- Summarize the purpose, notable changes, and validation performed.
+- Do not merge the pull request unless explicitly authorized.
+- If CI fails, inspect the logs, fix only task-related issues, and rerun validation.
+
+## If something goes wrong
+
+- Stop before using destructive commands.
+- Do not discard or overwrite changes you did not create.
+- Explain the problem, current branch, working tree state, and safest next options.
+- Ask for explicit authorization before any destructive recovery step.
    git switch -c agent/<task-id>-<short-description> origin/main
    ```
 

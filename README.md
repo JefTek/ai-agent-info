@@ -1,5 +1,10 @@
 # ai-agent-info
 
+Shared guidance for AI agents working in repositories and workspaces.
+
+## Shared guidance
+
+- [Git workflow instructions](shared/git-workflow.md)
 A practical, workspace-neutral library of notes, tips, tricks, skills, and
 agent patterns for Claude and GitHub Copilot.
 
