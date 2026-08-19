@@ -1,4 +1,4 @@
-# Git Workflow Instructions
+# Git workflow instructions
 
 Follow this Git workflow for all repository changes.
 
