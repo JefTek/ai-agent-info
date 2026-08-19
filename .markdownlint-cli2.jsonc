@@ -1,0 +1,28 @@
+{
+  // Markdown conventions for this repository. See AGENTS.md for the prose
+  // version of these rules.
+  "config": {
+    "default": true,
+
+    // Prose wraps at 80 characters. Tables, code blocks, and headings are
+    // exempt: table rows and command examples are not meaningfully wrappable,
+    // and breaking them hurts readability more than the long line does.
+    "MD013": {
+      "line_length": 80,
+      "tables": false,
+      "code_blocks": false,
+      "headings": false
+    },
+
+    // Repeated headings are only a problem within one section. A `Validation`
+    // subsection under `Push and pull request` is distinct from the top-level
+    // `Validation` section, and both are wanted.
+    "MD024": { "siblings_only": true },
+
+    // Placeholders such as `<path>` inside prose are angle-bracket
+    // conventions, not HTML. Code fences are already exempt from this rule.
+    "MD033": false
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**"]
+}

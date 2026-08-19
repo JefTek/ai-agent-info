@@ -49,6 +49,20 @@ A standalone document should:
 Use sentence case for headings, except where a proper noun or a term from an
 external specification requires otherwise.
 
+## Linting
+
+Markdown is linted with [markdownlint][ml]. Run it before opening a pull
+request; CI runs the same check.
+
+```bash
+npx markdownlint-cli2
+```
+
+Rules live in `.markdownlint-cli2.jsonc`. The ones worth knowing: prose wraps
+at 80 characters, while tables, code blocks, and headings are exempt.
+
+[ml]: https://github.com/DavidAnson/markdownlint-cli2
+
 ## What to avoid
 
 Avoid secrets, personal data, vendor claims that cannot be verified, and
