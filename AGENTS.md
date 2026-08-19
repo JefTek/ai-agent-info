@@ -42,11 +42,23 @@ the two will drift.
 
 ## Validation
 
-There is no build, lint, or test suite. Before opening a pull request:
+There is no build or test suite. Markdown is linted, and the same checks run
+in CI on every pull request:
 
-- Re-read the rendered diff for spliced or duplicated headings, which past
-  merges have introduced.
-- Confirm every relative link and in-page anchor resolves.
+```bash
+npx markdownlint-cli2
+```
+
+Rules live in `.markdownlint-cli2.jsonc`, so a local run and CI check exactly
+the same thing. CI additionally runs a link check over relative paths and
+in-page anchors; external URLs are not requested.
+
+The linter does not catch everything. Before opening a pull request, also:
+
+- Re-read the rendered diff for spliced or duplicated content, which past
+  merges have introduced twice.
 - Confirm no secrets, credentials, or personal data are present.
+- Confirm any claim that a document was checked against an external source
+  was actually checked.
 
 Do not report a check as passing unless it was actually run.
